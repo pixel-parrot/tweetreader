@@ -106,14 +106,14 @@ def playNewSound(word_list = []):
 
 
 def soundTest():
-    test_sounds = 'do'.split(' ')
-    playNewSound(test_sounds)
-
-    #test_sounds = 'well its been a lot we have accomplished thank you its you we thank'.split(' ')
+    #test_sounds = 'you'.split(' ')
     #playSound(test_sounds)
 
+    test_sounds = 'i said because we have been week its impossible to know how to make them great sometimes its a strange question'.split(' ')
+    playSound(test_sounds)
 
-subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds/new', shell=True)
+
+subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
 
 #getTimeline()
 
