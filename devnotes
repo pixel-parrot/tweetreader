@@ -1,0 +1,21 @@
+How to save Session:
+    run NOT as root
+    session save
+Load Session:
+    session restore X
+    where X is
+    2 - restore geometries of missing windows
+    1 - restore geometries of matching windows
+    0 - restore geometries of existing windows
+
+Things to do:
+
+    create list of unique words from trump tweets
+    create list of wav file words to compare to
+
+    see if voice package exists for python
+
+    find out if can create self-contained exe for python
+
+    find out how to include packages on website or host code
+    from a remote source for website

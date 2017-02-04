@@ -4,6 +4,7 @@ import wave
 import contextlib
 import config
 from twitter import *
+import subprocess
 
 os.chdir('/tweetreader/')
 #print os.getcwd()
@@ -75,5 +76,45 @@ def getTimeline():
         playSound(text_list)
 
 
-getTimeline()
+def playNewSound(word_list = []):
+    pygame.mixer.init()
+    wav_list = word_list 
+    #print str(wav_list)
+    wav_list = stripPunctuation(wav_list)
+    wav_list = [word + '.wav' for word in wav_list]
+    wav_list = [word.lower() for word in wav_list]
+    print str(wav_list)
 
+    for wav_file in wav_list:
+        #creating sound object
+        sound = pygame.mixer.Sound(os.path.join('sounds/new', wav_file))
+
+        # creating sound file string to test if it exists
+        sound_file = os.path.join('sounds/new', wav_file)
+        # checking if sound file exists for each word
+        try:
+            contextlib.closing(wave.open(sound_file, 'r'))
+        except:
+            print 'No such file exists.'
+            continue
+
+        # playing each sound sequentially
+        if pygame.mixer.Channel(0).get_busy() == False:
+            sound.play()
+        while pygame.mixer.Channel(0).get_busy() == True:
+            continue
+
+
+def soundTest():
+    test_sounds = 'do'.split(' ')
+    playNewSound(test_sounds)
+
+    #test_sounds = 'well its been a lot we have accomplished thank you its you we thank'.split(' ')
+    #playSound(test_sounds)
+
+
+subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds/new', shell=True)
+
+#getTimeline()
+
+soundTest()
