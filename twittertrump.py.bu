@@ -4,6 +4,7 @@ import wave
 import contextlib
 import config
 from twitter import *
+import subprocess
 
 os.chdir('/tweetreader/')
 #print os.getcwd()
@@ -41,7 +42,7 @@ def playSound(word_list = []):
         try:
             contextlib.closing(wave.open(sound_file, 'r'))
         except:
-            print 'No such file exists.'
+            print 'No such file exists: ' + sound_file
             continue
 
         # playing each sound sequentially
@@ -75,5 +76,28 @@ def getTimeline():
         playSound(text_list)
 
 
-getTimeline()
+def soundTest(test_sounds = []):
+    playSound(test_sounds)
+
+
+def testLoop():
+    test_string = ""
+
+    while test_string <> "xit":
+        subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
+        test_string = raw_input("Phrase to test: ")
+
+        if test_string <> "xit":
+            test_list = test_string.split(' ')
+            soundTest(test_list)
+
+
+#MAIN SECTION
+subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
+
+#getTimeline()
+
+#soundTest()
+
+testLoop()
 

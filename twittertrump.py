@@ -30,7 +30,7 @@ def playSound(word_list = []):
     wav_list = stripPunctuation(wav_list)
     wav_list = [word + '.wav' for word in wav_list]
     wav_list = [word.lower() for word in wav_list]
-    print str(wav_list)
+    #print str(wav_list)
 
     for wav_file in wav_list:
         #creating sound object
@@ -42,7 +42,7 @@ def playSound(word_list = []):
         try:
             contextlib.closing(wave.open(sound_file, 'r'))
         except:
-            print 'No such file exists.'
+            print 'No such file exists: ' + sound_file
             continue
 
         # playing each sound sequentially
@@ -76,45 +76,30 @@ def getTimeline():
         playSound(text_list)
 
 
-def playNewSound(word_list = []):
-    pygame.mixer.init()
-    wav_list = word_list 
-    #print str(wav_list)
-    wav_list = stripPunctuation(wav_list)
-    wav_list = [word + '.wav' for word in wav_list]
-    wav_list = [word.lower() for word in wav_list]
-    print str(wav_list)
-
-    for wav_file in wav_list:
-        #creating sound object
-        sound = pygame.mixer.Sound(os.path.join('sounds/new', wav_file))
-
-        # creating sound file string to test if it exists
-        sound_file = os.path.join('sounds/new', wav_file)
-        # checking if sound file exists for each word
-        try:
-            contextlib.closing(wave.open(sound_file, 'r'))
-        except:
-            print 'No such file exists.'
-            continue
-
-        # playing each sound sequentially
-        if pygame.mixer.Channel(0).get_busy() == False:
-            sound.play()
-        while pygame.mixer.Channel(0).get_busy() == True:
-            continue
-
-
-def soundTest():
-    #test_sounds = 'you'.split(' ')
-    #playSound(test_sounds)
-
-    test_sounds = 'i said because we have been week its impossible to know how to make them great sometimes its a strange question'.split(' ')
+def soundTest(test_sounds = []):
     playSound(test_sounds)
 
 
+def testLoop():
+    test_string = ""
+
+    while test_string <> "xit":
+        test_string = raw_input("Phrase to test: ")
+        subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
+
+        if test_string <> "xit":
+            test_list = test_string.split(' ')
+            soundTest(test_list)
+
+        subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
+
+
+#MAIN SECTION
 subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
 
 #getTimeline()
 
-soundTest()
+#soundTest()
+
+testLoop()
+
