@@ -76,6 +76,39 @@ def getTimeline():
         playSound(text_list)
 
 
+def getTimelineTest():
+    config = {}
+    config_path = os.path.join('config.py')
+    execfile(config_path, config)
+
+    twitter = Twitter(auth = OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
+
+    user = "realDonaldTrump"
+
+    results = twitter.statuses.user_timeline(screen_name = user)
+
+#    for status in results:
+#        print "(%s) %s" % (status["created_at"], status["text"].encode("ascii", "ignore"))
+
+    # example of how to reference just text in a tweet
+#    for i in range(0,1):
+#        print results[i]["text"]
+
+    while True:
+        tweet_number = raw_input("Enter Tweet Number: ")
+
+        if tweet_number <> 'xit':
+            tweet_int = int(tweet_number)
+            tweet_start = tweet_int - 1
+
+            for i in range(tweet_start, tweet_int):
+                text_list = results[i]["text"].split()
+                print str(text_list)
+                playSound(text_list)
+        else:
+            return False
+
+
 def soundTest(test_sounds = []):
     playSound(test_sounds)
 
@@ -95,11 +128,19 @@ def testLoop():
 
 
 #MAIN SECTION
-subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
+choice = raw_input('testLoop or getTimeline: ')
+if choice == 'testLoop':
+    testLoop()
+else:
+    getTimelineTest()
+
+
+#subprocess.call('cp /home/arthur/Desktop/TrumpSounds/Hannity/Words/*.wav /tweetreader/sounds', shell=True)
 
 #getTimeline()
 
 #soundTest()
 
-testLoop()
+#testLoop()
+
 
