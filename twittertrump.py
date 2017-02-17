@@ -103,7 +103,8 @@ def getTimelineTest():
 
             for i in range(tweet_start, tweet_int):
                 text_list = results[i]["text"].split()
-                print str(text_list)
+                text_string = ' '.join(text_list)
+                print str('Tweet Text: ' + text_string)
                 playSound(text_list)
         else:
             return False
